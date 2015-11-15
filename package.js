@@ -19,12 +19,12 @@ Package.onUse(function(api) {
     'u2622:persistent-session'
   ]);
   api.addFiles([
-     'track-visitors-server.js',
+     'server/track-visitors.js',
      'server/methods/track-visitors.js',
      'server/publications.js'
   ], 'server');
   api.addFiles([
-    'track-visitors-client.js',
+    'client/track-visitors.js',
   ], 'client');
   api.addFiles([
     'lib/collections/visitors.js',
