@@ -10,4 +10,4 @@ visitor.prototype.init = function(visit) {
 
 };
 
-BenjaTrackVisit = new visitor();// Write your package code here!
+Meteor.BenjaTrackVisit = new visitor();// Write your package code here!

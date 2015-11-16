@@ -23,7 +23,7 @@ Meteor.methods({
 
 
 		if(visitor){
-			BenjaTrackVisit.init(visitor);
+			Meteor.BenjaTrackVisit.init(visitor);
 			return visitor;
 		}
 	},
@@ -57,7 +57,7 @@ Meteor.methods({
 
 		info[infoAttributes.fieldName]= infoAttributes.value;
 
-		BenjaVisitors.update({_id: BenjaTrackVisit._id}, {$set: info});
+		BenjaVisitors.update({_id: Meteor.BenjaTrackVisit._id}, {$set: info});
 	}
 
 });
