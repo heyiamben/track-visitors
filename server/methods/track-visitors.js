@@ -3,8 +3,10 @@ Meteor.methods({
 			
 	    var session = {
 			token: Random.secret(),
+			connectionId: [this.connection.id],
 			submitted: new Date()
 		};
+
 		
 		var sessionId = BenjaVisitors.insert(session);
 
@@ -19,11 +21,11 @@ Meteor.methods({
 			token: String
 		});
 
-		visitor = BenjaVisitors.findOne({_id: visitorAttributes._id, token: visitorAttributes.token});
+		visitor = BenjaVisitors.findOne({_id: visitorAttributes._id, token: visitorAttributes.token}, {fields: {_id:true, token: true}});
 
 
 		if(visitor){
-			Meteor.BenjaTrackVisit.init(visitor);
+			BenjaVisitors.update({_id: visitorAttributes._id, token: visitorAttributes.token}, { $addToSet: {connectionId: this.connection.id}})
 			return visitor;
 		}
 	},
@@ -47,7 +49,7 @@ Meteor.methods({
 			return;
 		}
 		
-		check(infoAttributes, {
+		/*check(infoAttributes, {
 			fieldName: String,
 			value: type,
 			type: String
@@ -57,7 +59,7 @@ Meteor.methods({
 
 		info[infoAttributes.fieldName]= infoAttributes.value;
 
-		BenjaVisitors.update({_id: Meteor.BenjaTrackVisit._id}, {$set: info});
+		BenjaVisitors.update({_id: BenjaTrackVisit._id}, {$set: info});*/
 	}
 
 });

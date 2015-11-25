@@ -29,7 +29,7 @@ Package.onUse(function(api) {
   api.addFiles([
     'lib/collections/visitors.js',
   ], both);
-  //api.export('BenjaTrackVisit', both);
+  api.export('BenjaTrackVisit', both);
 });
 
 

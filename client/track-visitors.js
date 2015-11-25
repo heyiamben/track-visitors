@@ -1,4 +1,4 @@
-visitor = function() {
+var visitor = function() {
 
 };
 
@@ -16,28 +16,33 @@ visitor.prototype._init = function() {
     }
 
     Tracker.autorun(function(){
-      if(Session.get('benjaTrackVisitToken')){
-        visit = {
-          _id: Session.get('benjaTrackVisitToken')._id,
-          token: Session.get('benjaTrackVisitToken').token
-        }
-        var subscription = Meteor.connection.subscribe('trackVisitorsByIdAndToken', visit);
-        if (subscription.ready()) {
-          var visitorDetails = BenjaVisitors.findOne({_id: visit._id});
-          if(!visitorDetails){
-            Session.setPersistent('benjaTrackVisitToken', null);
-          } else {
-            Meteor.call('identify', visit, function(error, result){
-              if(result._id){
-                instance.data = result;
-              } else {
-                Session.setPersistent('benjaTrackVisitToken', null);
-              }
-            });
+      if(Meteor.status().connected){
+        if(Session.get('benjaTrackVisitToken')){
+          visit = {
+            _id: Session.get('benjaTrackVisitToken')._id,
+            token: Session.get('benjaTrackVisitToken').token
           }
+          var subscription = Meteor.connection.subscribe('trackVisitorsByIdAndToken', visit);
+          if (subscription.ready()) {
+            var visitorDetails = BenjaVisitors.findOne({_id: visit._id});
+            console.log(visitorDetails);
+            if(!visitorDetails){
+              Session.setPersistent('benjaTrackVisitToken', null);
+            } else {
+              Meteor.call('identify', visit, function(error, result){
+                //console.log(result);
+                if(result._id){
+                  //console.log(result);
+                  instance.data = result;
+                } else {
+                  Session.setPersistent('benjaTrackVisitToken', null);
+                }
+              });
+            }
+          }
+        } else {
+          instance._createSession();
         }
-      } else {
-        instance._createSession();
       }
       
     });
