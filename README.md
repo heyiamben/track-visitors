@@ -4,13 +4,14 @@ This package gives each site visitor a uniqueId accessible from both the server 
 
 <b>Server Side:</b><br/>
  
-To get the visitor id you can call  <b>BenjaTrackVisit.visitorId();</b>
+To get the visitor id you can call  <b>TrackVisit.visitorId();</b>
 
 <b>Usage on the Client Side:</b><br/>
-To get the visitorId you can call <b>Session.get('benjaTrackVisit')<b/><br/>
+To get the visitorId you can call <b>Session.get('TrackVisit')<b/><br/>
+or TrackVisit._id
 
 
 <b>To do:</b><br/>
-- Add expiration date
-- Allow the adding additional data to each visitors collection
+- Add an expiration date to the visitor id and token
+- Allow the adding of additional data about the visitor
 - Remove old connectionIds on hot reloads

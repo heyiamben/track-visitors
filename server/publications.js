@@ -1,6 +1,6 @@
 Meteor.publish('trackVisitorsById', function(id){
 	check(id, String);
-	return BenjaVisitors.find({_id: id}, {fields: { _id: true}});
+	return TrackVisitors.find({_id: id}, {fields: { _id: true}});
 });
 
 
@@ -9,5 +9,5 @@ Meteor.publish('trackVisitorsByIdAndToken', function(visitorAttributes){
 		_id: String,
 		token: String
 	});
-	return BenjaVisitors.find({_id: visitorAttributes._id, token: visitorAttributes.token}, {fields: { _id: true, token: true}});
+	return TrackVisitors.find({_id: visitorAttributes._id, token: visitorAttributes.token}, {fields: { _id: true, token: true}});
 });

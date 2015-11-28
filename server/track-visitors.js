@@ -3,12 +3,12 @@ var visitor = function() {
 };
 
 
-BenjaTrackVisit = new visitor();// Write your package code here!
+TrackVisit = new visitor();// Write your package code here!
 
 
 Meteor.onConnection(function(connection) {
   visitor.prototype.visitorId = function() {
-		visit=BenjaVisitors.findOne( { connectionId: connection.id});
+		visit=TrackVisitors.findOne( { connectionId: connection.id});
 		if(visit._id){
 			return visit._id
 		} else {
@@ -17,6 +17,6 @@ Meteor.onConnection(function(connection) {
 	};
 
   connection.onClose(function() {
-    BenjaVisitors.update( { connectionId: connection.id}, { $pull: { connectionId: connection.id}})
+    TrackVisitors.update( { connectionId: connection.id}, { $pull: { connectionId: connection.id}})
   });
 });

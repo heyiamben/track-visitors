@@ -10,29 +10,29 @@ visitor.prototype._init = function() {
     var visit = {};
 
 
-    if(Session.get('benjaTrackVisit')){
-      instance.data._id = Session.get('benjaTrackVisit')._id;
-      instance.data.token = Session.get('benjaTrackVisit').token;
+    if(Session.get('TrackVisit')){
+      instance.data._id = Session.get('TrackVisit')._id;
+      instance.data.token = Session.get('TrackVisit').token;
     }
 
     Tracker.autorun(function(){
       if(Meteor.status().connected){
-        if(Session.get('benjaTrackVisit')){
+        if(Session.get('TrackVisit')){
           visit = {
-            _id: Session.get('benjaTrackVisit')._id,
-            token: Session.get('benjaTrackVisit').token
+            _id: Session.get('TrackVisit')._id,
+            token: Session.get('TrackVisit').token
           }
           var subscription = Meteor.connection.subscribe('trackVisitorsByIdAndToken', visit);
           if (subscription.ready()) {
-            var visitorDetails = BenjaVisitors.findOne({_id: visit._id});
+            var visitorDetails = TrackVisitorsCol.findOne({_id: visit._id});
             if(!visitorDetails){
-              Session.setPersistent('benjaTrackVisit', null);
+              Session.setPersistent('TrackVisit', null);
             } else {
               Meteor.call('identify', visit, function(error, result){
                 if(result._id){
                   instance.data = result;
                 } else {
-                  Session.setPersistent('benjaTrackVisit', null);
+                  Session.setPersistent('TrackVisit', null);
                 }
               });
             }
@@ -53,12 +53,12 @@ visitor.prototype.updateInfo = function(data){
 
 visitor.prototype._createSession = function() {
   Meteor.call('createSession', function(error, result){
-      Session.setPersistent('benjaTrackVisit', result);
+      Session.setPersistent('TrackVisit', result);
   });
 }
 
-BenjaTrackVisit = new visitor();// Write your package code here!
+TrackVisit = new visitor();// Write your package code here!
 
 Meteor.startup(function(){
-    BenjaTrackVisit._init();
+    TrackVisit._init();
 });
