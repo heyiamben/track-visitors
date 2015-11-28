@@ -25,14 +25,11 @@ visitor.prototype._init = function() {
           var subscription = Meteor.connection.subscribe('trackVisitorsByIdAndToken', visit);
           if (subscription.ready()) {
             var visitorDetails = BenjaVisitors.findOne({_id: visit._id});
-            console.log(visitorDetails);
             if(!visitorDetails){
               Session.setPersistent('benjaTrackVisitToken', null);
             } else {
               Meteor.call('identify', visit, function(error, result){
-                //console.log(result);
                 if(result._id){
-                  //console.log(result);
                   instance.data = result;
                 } else {
                   Session.setPersistent('benjaTrackVisitToken', null);
