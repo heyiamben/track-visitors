@@ -2,7 +2,7 @@ Package.describe({
   name: 'benja:track-visitors',
   version: '0.0.1',
   // Brief, one-line summary of the package.
-  summary: 'This package gives each side visitor a uniqueId accessible from both the server and client side',
+  summary: 'This package gives each site visitor a uniqueId accessible from both the server and client side',
   // URL to the Git repository containing the source code for this package.
   git: 'https://github.com/heyiamben/track-visitors',
   // By default, Meteor will default to using README.md for documentation.
