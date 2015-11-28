@@ -24,7 +24,7 @@ visitor.prototype._init = function() {
           }
           var subscription = Meteor.connection.subscribe('trackVisitorsByIdAndToken', visit);
           if (subscription.ready()) {
-            var visitorDetails = TrackVisitorsCol.findOne({_id: visit._id});
+            var visitorDetails = TrackVisitors.findOne({_id: visit._id});
             if(!visitorDetails){
               Session.setPersistent('TrackVisit', null);
             } else {
