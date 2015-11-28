@@ -16,7 +16,7 @@ Package.onUse(function(api) {
   api.use([
     'ecmascript',
     'mongo',
-    'u2622:persistent-session'
+    'u2622:persistent-session@0.4.3'
   ]);
   api.addFiles([
      'server/track-visitors.js',
