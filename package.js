@@ -1,6 +1,6 @@
 Package.describe({
   name: 'benja:track-visitors',
-  version: '0.0.2',
+  version: '0.0.3',
   // Brief, one-line summary of the package.
   summary: 'This package gives each site visitor a uniqueId accessible from both the server and client side',
   // URL to the Git repository containing the source code for this package.

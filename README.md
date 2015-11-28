@@ -7,7 +7,7 @@ This package gives each site visitor a uniqueId accessible from both the server 
 To get the visitor id you can call  <b>BenjaTrackVisit.visitorId();</b>
 
 <b>Usage on the Client Side:</b><br/>
-To get the visitorId you can call <b>Session.get('benjaTrackVisitToken')<b/><br/>
+To get the visitorId you can call <b>Session.get('benjaTrackVisit')<b/><br/>
 
 
 <b>To do:</b><br/>
