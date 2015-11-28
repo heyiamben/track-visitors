@@ -4,7 +4,7 @@ This package gives each site visitor a uniqueId accessible from both the server 
 
 <b>Server Side:</b><br/>
  
-To get the visitor id you can call  <b>TrackVisit.visitorId();</b>
+To get the visitor id you can call  <b>TrackVisit.visitorId(this.connection);</b> from any method or publication
 
 <b>Usage on the Client Side:</b><br/>
 To get the visitorId you can call <b>Session.get('TrackVisit')<b/><br/>

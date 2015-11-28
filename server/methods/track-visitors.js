@@ -60,6 +60,9 @@ Meteor.methods({
 		info[infoAttributes.fieldName]= infoAttributes.value;
 
 		TrackVisitors.update({_id: TrackVisit._id}, {$set: info});*/
+	},
+	test: function(){
+		return TrackVisit.visitorId(this.connection)
 	}
 
 });

@@ -57,6 +57,12 @@ visitor.prototype._createSession = function() {
   });
 }
 
+visitor.prototype.test = function() {
+  Meteor.call('test', function(error, result){
+      console.log(result);
+  });
+}
+
 TrackVisit = new visitor();// Write your package code here!
 
 Meteor.startup(function(){
