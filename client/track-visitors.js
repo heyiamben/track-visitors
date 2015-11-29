@@ -4,10 +4,18 @@ var visitor = function() {
 
 visitor.prototype._init = function() {
       var instance = this;
-      var visitor = {
-        _id: 'noneyet',
-        token: 'noneyet',
-        connected: false,
+      if(!Session.get('TrackVisit')){
+        var visitor = {
+          _id: 'noneyet',
+          token: 'noneyet',
+          connected: false,
+        }
+      } else {
+        var visitor = {
+          _id: Session.get('TrackVisit')._id,
+          token: Session.get('TrackVisit').token,
+          connected: false
+        }
       }
       Session.setPersistent('TrackVisit', visitor);
       Tracker.autorun(function(){
