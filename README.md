@@ -7,26 +7,8 @@ This package gives each site visitor a uniqueId accessible from both the server 
 To get the visitor id you can call  <b>TrackVisit.visitorId(this.connection);</b> from any method or publication
 
 <b>Usage on the Client Side:</b><br/>
-To get the visitor object you can call <b>Session.get('TrackVisit')<b/><br/>
-If you are using visitorId in a publication then you should only use template level subscriptions and it should be placed in an autorun as follows
-
-```javascript
-var instance = this;
-instance.loaded = new ReactiveVar(0);
-instance.autorun(function() {
-	if(Session.get('TrackVisit').connected){
-		var subscription = instance.subscribe('subscriptionName', params);
-		if (subscription.ready()) {
-			instance.loaded.set(1);
-		}
-	}
-});
-```
-This is so that the subscription will only happen after the new connectionId is attached to the current visitors document in the trackvisitors collection.
-
-.<br/>
-
-
+To get the visitorId you can call <b>Session.get('TrackVisit')<b/><br/>
+or TrackVisit._id
 
 
 <b>To do:</b><br/>
