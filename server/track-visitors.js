@@ -5,15 +5,15 @@ var visitor = function() {
 
 TrackVisit = new visitor();// Write your package code here!
 
-
 visitor.prototype.visitorId = function(connection) {
-	visit=TrackVisitors.findOne( { connectionId: connection.id});
-	if(visit._id){
+	var visit=TrackVisitors.findOne({ connectionId: connection.id});
+	if(visit){
 		return visit._id
 	} else {
 		return;
 	}
 };
+
 
 
 Meteor.onConnection(function(connection) {

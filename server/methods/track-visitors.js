@@ -1,33 +1,49 @@
 Meteor.methods({
-	createSession: function(){
-			
-	    var session = {
-			token: Random.secret(),
-			connectionId: [this.connection.id],
-			submitted: new Date()
-		};
+	createSession: function(sessionAttributes){
+		var newSession = true;
+		var visitor = null;
+
+		if(sessionAttributes.exists){
+			check(sessionAttributes, {
+				_id: String,
+				token: String,
+				exists: Boolean
+			});
+			visitor = TrackVisitors.findOne({_id: sessionAttributes._id, token: sessionAttributes.token}, {fields: {_id:true, token: true}});
+			if (visitor){
+				newSession = false;
+			}
+		} else {
+			check(sessionAttributes, {
+				exists: Boolean
+			});
+		}
+
+		if(newSession){
+			var visitor = {
+				token: Random.secret(),
+				connectionId: [this.connection.id],
+				submitted: new Date()
+			};
+
+			var sessionId = TrackVisitors.insert(visitor);
+			if(sessionId){
+				return {
+					token: visitor.token,
+					_id: sessionId,
+					connectionId: this.connection.id
+				};
+			}
+		} else {
+			TrackVisitors.update({_id: sessionAttributes._id, token: sessionAttributes.token}, { $addToSet: {connectionId: this.connection.id}});
+			return {
+					token: sessionAttributes.token,
+					_id: sessionAttributes._id,
+					connectionId: this.connection.id
+				};
+		}
 
 		
-		var sessionId = TrackVisitors.insert(session);
-
-		return {
-			token: session.token,
-			_id: sessionId
-		};
-	},
-	identify: function(visitorAttributes){
-		check(visitorAttributes, {
-			_id: String,
-			token: String
-		});
-
-		visitor = TrackVisitors.findOne({_id: visitorAttributes._id, token: visitorAttributes.token}, {fields: {_id:true, token: true}});
-
-
-		if(visitor){
-			TrackVisitors.update({_id: visitorAttributes._id, token: visitorAttributes.token}, { $addToSet: {connectionId: this.connection.id}})
-			return visitor;
-		}
 	},
 	updateInfo: function(infoAttributes){
 		var type=null;

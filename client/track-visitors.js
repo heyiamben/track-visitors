@@ -3,45 +3,13 @@ var visitor = function() {
 };
 
 visitor.prototype._init = function() {
-    var instance = this;
-    if(!instance.data){
-      instance.data = {};
-    }
-    var visit = {};
-
-
-    if(Session.get('TrackVisit')){
-      instance.data._id = Session.get('TrackVisit')._id;
-      instance.data.token = Session.get('TrackVisit').token;
-    }
-
-    Tracker.autorun(function(){
+      var instance = this;
+      Tracker.autorun(function(){
       if(Meteor.status().connected){
-        if(Session.get('TrackVisit')){
-          visit = {
-            _id: Session.get('TrackVisit')._id,
-            token: Session.get('TrackVisit').token
-          }
-          var subscription = Meteor.connection.subscribe('trackVisitorsByIdAndToken', visit);
-          if (subscription.ready()) {
-            var visitorDetails = TrackVisitors.findOne({_id: visit._id});
-            if(!visitorDetails){
-              Session.setPersistent('TrackVisit', null);
-            } else {
-              Meteor.call('identify', visit, function(error, result){
-                if(result._id){
-                  instance.data = result;
-                } else {
-                  Session.setPersistent('TrackVisit', null);
-                }
-              });
-            }
-          }
-        } else {
           instance._createSession();
-        }
+      } else {
+          instance._disconnect();
       }
-      
     });
 };
 
@@ -52,9 +20,29 @@ visitor.prototype.updateInfo = function(data){
 }
 
 visitor.prototype._createSession = function() {
-  Meteor.call('createSession', function(error, result){
-      Session.setPersistent('TrackVisit', result);
+  var visit = { exists: false };
+  if(Session.get('TrackVisit')){
+    visit._id = Session.get('TrackVisit')._id;
+    visit.token = Session.get('TrackVisit').token
+    visit.exists = true;
+  }
+  Meteor.call('createSession', visit,  function(error, result){
+      var visitor = {
+        _id: result._id,
+        token: result.token,
+        connected: true,
+      }
+      Session.setPersistent('TrackVisit', visitor);
   });
+}
+
+visitor.prototype._disconnect = function(){
+  var visitor = {
+    _id: Session.get('TrackVisit')._id,
+    token: Session.get('TrackVisit').token,
+    connected: false,
+  }
+  Session.setPersistent('TrackVisit', visitor);
 }
 
 visitor.prototype.test = function() {
