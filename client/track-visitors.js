@@ -4,6 +4,12 @@ var visitor = function() {
 
 visitor.prototype._init = function() {
       var instance = this;
+      var visitor = {
+        _id: 'noneyet',
+        token: 'noneyet',
+        connected: false,
+      }
+      Session.setPersistent('TrackVisit', visitor);
       Tracker.autorun(function(){
       if(Meteor.status().connected){
           instance._createSession();
