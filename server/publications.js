@@ -11,3 +11,8 @@ Meteor.publish('trackVisitorsByIdAndToken', function(visitorAttributes){
 	});
 	return TrackVisitors.find({_id: visitorAttributes._id, token: visitorAttributes.token}, {fields: { _id: true, token: true}});
 });
+
+
+Meteor.publish('currentVisitor', function(){
+	return TrackVisitors.find({ connectionId: this.connection.id});
+});

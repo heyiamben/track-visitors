@@ -65,7 +65,7 @@ Meteor.methods({
 			return;
 		}
 		
-		/*check(infoAttributes, {
+		check(infoAttributes, {
 			fieldName: String,
 			value: type,
 			type: String
@@ -75,7 +75,7 @@ Meteor.methods({
 
 		info[infoAttributes.fieldName]= infoAttributes.value;
 
-		TrackVisitors.update({_id: TrackVisit._id}, {$set: info});*/
+		TrackVisitors.update({_id: TrackVisit.visitorId(this.connection)}, {$set: info});
 	},
 	test: function(){
 		return TrackVisit.visitorId(this.connection)

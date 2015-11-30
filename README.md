@@ -20,7 +20,7 @@ If you are using visitorId in a publication then you should only use template le
 var instance = this;
 instance.loaded = new ReactiveVar(0);
 instance.autorun(function() {
-	if(Session.get('TrackVisit').connected){
+	if(Session.get('TrackVisitConnected')){
 		var subscription = instance.subscribe('subscriptionName', params);
 		if (subscription.ready()) {
 			instance.loaded.set(1);

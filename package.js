@@ -16,19 +16,19 @@ Package.onUse(function(api) {
   api.use([
     'ecmascript',
     'mongo',
-    'u2622:persistent-session@0.4.3'
+    'u2622:persistent-session@0.4.3',
+    'templating'
   ]);
   api.addFiles([
+     'lib/collections/visitors.js',
      'server/track-visitors.js',
      'server/methods/track-visitors.js',
      'server/publications.js'
   ], 'server');
   api.addFiles([
+    'lib/collections/visitors.js',
     'client/track-visitors.js',
   ], 'client');
-  api.addFiles([
-    'lib/collections/visitors.js',
-  ], both);
   api.export('TrackVisit', both);
 });
 
