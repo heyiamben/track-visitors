@@ -22,11 +22,15 @@ var info = {
 	visitorId: Session.get('TrackVisit')._id, 
 	token: Session.get('TrackVisit').token, 
 	fieldName: 'email', 
-	value: email, 
+	value: someemail@email.com, 
 	type: 'string'
 }
 TrackVisit.updateInfo(info)
 ```
+The possible types are
+string, number, boolean
+
+
 
 If you are using visitorId in a publication then you should only use template level subscriptions and it should be placed in an autorun as follows
 
