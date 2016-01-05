@@ -9,10 +9,23 @@ To get the visitorId from inside a publication or method you can call
 TrackVisit.visitorId(this.connection);
 ```
 
+
 <b>Usage on the Client Side:</b><br/>
 To get the visitor object you can call
 ```javascript
 Session.get('TrackVisit')
+```
+
+To add or update info about the visitor you can call
+```javascript
+var info = {
+	visitorId: Session.get('TrackVisit')._id, 
+	token: Session.get('TrackVisit').token, 
+	fieldName: 'email', 
+	value: email, 
+	type: 'string'
+}
+TrackVisit.updateInfo(info)
 ```
 
 If you are using visitorId in a publication then you should only use template level subscriptions and it should be placed in an autorun as follows
@@ -38,5 +51,4 @@ This is so that the subscription will only happen after the new connectionId is 
 
 <b>To do:</b><br/>
 - Add an expiration date to the visitor id and token
-- Allow the adding of additional data about the visitor
 - Remove old connectionIds on hot reloads
