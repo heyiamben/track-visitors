@@ -22,7 +22,7 @@ var info = {
 	visitorId: Session.get('TrackVisit')._id, 
 	token: Session.get('TrackVisit').token, 
 	fieldName: 'email', 
-	value: someemail@email.com, 
+	value: "someemail@email.com", 
 	type: 'string'
 }
 TrackVisit.updateInfo(info)
