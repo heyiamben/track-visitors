@@ -1,6 +1,6 @@
 Meteor.publish('trackVisitorsById', function(id){
 	check(id, String);
-	return TrackVisitors.find({_id: id}, {fields: { _id: true}});
+	return TrackVisitors.find({_id: id}, {fields: { _id: true , "data.email": true, "data.name": true}});
 });
 
 

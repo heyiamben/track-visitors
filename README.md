@@ -8,6 +8,7 @@ To get the visitorId from inside a publication or method you can call
 ```javascript
 TrackVisit.visitorId(this.connection);
 ```
+
 <b>Usage on the Client Side:</b><br/>
 To get the visitor object you can call
 ```javascript

@@ -17,7 +17,7 @@ Package.onUse(function(api) {
     'ecmascript',
     'mongo',
     'u2622:persistent-session@0.4.3',
-    'templating'
+    'templating',
   ]);
   api.addFiles([
      'lib/collections/visitors.js',
@@ -30,12 +30,12 @@ Package.onUse(function(api) {
     'client/track-visitors.js',
   ], 'client');
   api.export('TrackVisit', both);
+  api.export('TrackVisitors', both);
+  api.export('TrackVisitorsSubs', 'client');
 });
 
 
 Package.onTest(function(api) {
   api.use('ecmascript');
   api.use('tinytest');
-  api.use('benja:track-visitors');
-  api.addFiles('track-visitors-tests.js');
 });

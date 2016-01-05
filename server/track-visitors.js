@@ -14,6 +14,15 @@ visitor.prototype.visitorId = function(connection) {
 	}
 };
 
+visitor.prototype.visitor = function(connection) {
+	var visit=TrackVisitors.findOne({ connectionId: connection.id});
+	if(visit){
+		return visit;
+	} else {
+		return;
+	}
+};
+
 
 
 Meteor.onConnection(function(connection) {

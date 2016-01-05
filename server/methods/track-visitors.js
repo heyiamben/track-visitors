@@ -73,7 +73,7 @@ Meteor.methods({
 
 		var info = {};
 
-		info[infoAttributes.fieldName]= infoAttributes.value;
+		info['data.'+infoAttributes.fieldName]= infoAttributes.value;
 
 		TrackVisitors.update({_id: TrackVisit.visitorId(this.connection)}, {$set: info});
 	},
